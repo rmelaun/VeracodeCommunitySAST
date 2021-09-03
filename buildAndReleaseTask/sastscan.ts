@@ -73,14 +73,14 @@ async function run(): Promise<void> {
         scanTarget = await prepareScanTarget(scanTarget);
         console.log('Scan Target: ' + `${scanTarget}`);
 
-        // Check the input file to make sure it is < 100 MB as the scanner does not support it
-        // https://help.veracode.com/reader/tS9CaFwL4_lbIEWWomsJoA/keSyYhPseqTAGwmhLFy2yA
+        // Check the input file to make sure it is < 200 MB as the scanner does not support it
+        // https://help.veracode.com/r/About_Pipeline_Scan_Prerequisites
         const stats: fs.Stats = fs.statSync(scanTarget);
         const fileSizeInBytes: number = stats.size;
         const fileSizeInMb: number = fileSizeInBytes / 1000000;
         console.log('Scan Target File Size: '  + `${fileSizeInMb}` + ' MB.');
 
-        if (fileSizeInMb > 100) {
+        if (fileSizeInMb > 200) {
             throw new Error('Scan Target is too big, please submit a file that is less than 100 MB.');
         }
 
